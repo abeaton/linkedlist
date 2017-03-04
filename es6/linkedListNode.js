@@ -1,7 +1,7 @@
 export default class Node {
 	constructor (value) {
-		if(!value){
-			throw "The value passed into the constructor must be defined.";
+		if(typeof(value) === 'object'){
+			throw "The value passed into the constructor must be defined and cannot be an object.";
 		}
 
 		this.value = value;

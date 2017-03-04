@@ -1,0 +1,35 @@
+{
+  "name": "linkedlist",
+  "version": "1.0.0",
+  "description": "A linkedlist in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abeaton/linkedlist.git"
+  },
+  "author": "Adam Beaton",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/abeaton/linkedlist/issues"
+  },
+  "ava": {
+    "require": ["babel-register"],
+    "babel": "inherit"
+  },
+  "babel":{
+    "presets": [
+      "es2015"
+    ]
+  },
+  "homepage": "https://github.com/abeaton/linkedlist#readme",
+  "devDependencies": {
+    "ava": "^0.18.2",
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-register": "^6.23.0"
+  }
+}

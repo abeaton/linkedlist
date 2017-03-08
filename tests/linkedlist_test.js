@@ -6,10 +6,9 @@ import Node from '../es6/linkedListNode.js';
  * constructor
  */
 
+test("Test empty", testConstruction, [], "empty", 0)
 test("Test multiple numbers", testConstruction, [2, 3, 1, 5, 7], "2 -> 3 -> 1 -> 5 -> 7", 5);
-test("Test null", testConstruction, null, "empty", 0);
-test("Test empty array", testConstruction, [], "empty", 0);
-test("Test a single number", testConstruction, 15, "15", 1);
+test("Test a single number", testConstruction, [15], "15", 1);
 test("Test two numbers", testConstruction, [15, 16], "15 -> 16", 2);
 test("Test three numbers", testConstruction, [3, 4, 5], "3 -> 4 -> 5", 3);
 
@@ -19,11 +18,12 @@ function testConstruction(t, initialValues, expectedString, expectedSize){
 	t.is(linkedlist.getSize(), expectedSize);
 }
 
-test("Test throws - object", testInvalidConstruction, {x:13});
-test("Test throws - array of objects", testInvalidConstruction, [{x:10, y:11}]);
+test("Test different types", testInvalidConstruction, [2, "test"]);
+test("Test throws - object", testInvalidConstruction, [{x:13}]);
+test("Test throws - array of objects", testInvalidConstruction, [{x:10, y:11}, {x:1, y:1}]);
 
 function testInvalidConstruction(t, initialValues){
-	t.throws(() => new linkedlist(...initialValues));
+	t.throws(() => new LinkedList(...initialValues));
 }
 
 /**
@@ -31,11 +31,11 @@ function testInvalidConstruction(t, initialValues){
  */
 
 test("Test multiple numbers", testGetHeadValue, 2, [2, 3, 1, 5, 7]);
-test("Test a single number", testGetHeadValue, 15, 15);
+test("Test a single number", testGetHeadValue, 15, [15]);
 test("Test two numbers", testGetHeadValue, 15, [15, 16]);
 test("Test three numbers", testGetHeadValue, 3, [3, 4, 5]);
 
-function testGetHeadValue(t, expected, ...initialValues){
+function testGetHeadValue(t, expected, initialValues){
 	var linkedlist = new LinkedList(...initialValues);
 	t.is(linkedlist.getHeadValue(), expected);
 }
@@ -50,11 +50,11 @@ test("Test null head throws", t => {
  */
 
 test("Test multiple numbers", testGetTailValue, 7, [2, 3, 1, 5, 7]);
-test("Test a single number", testGetTailValue, 15, 15);
+test("Test a single number", testGetTailValue, 15, [15]);
 test("Test two numbers", testGetTailValue, 16, [15, 16]);
 test("Test three numbers", testGetTailValue, 5, [3, 4, 5]);
 
-function testGetTailValue(t, expected, ...initialValues){
+function testGetTailValue(t, expected, initialValues){
 	var linkedlist = new LinkedList(...initialValues);
 	t.is(linkedlist.getTailValue(), expected);
 }
@@ -254,7 +254,7 @@ test("Equivalent to remove head, non empty linkedlist", t => {
 
 	linkedlist.removeAtIndex(0);
 	t.is(linkedlist.toString(), "3 -> 2");
-	t.is(linkedlist.getHeadValue(), 2);
+	t.is(linkedlist.getHeadValue(), 3);
 });
 
 test("Equivalent to remove tail, non empty linkedlist", t => {

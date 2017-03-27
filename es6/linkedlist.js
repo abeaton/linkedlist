@@ -18,14 +18,12 @@ export default class LinkedList {
 	}
 
 	_throwIfInvalidConstructionInput(initialValues){
-		// TODO something isn't working below
-
-		/*var type = typeof(initialValues[0]);
+		var type = typeof(initialValues[0]);
 		var sameType = initialValues.every(v => typeof(v) === type);
 
-		if(!(this.type === "number" || this.type === "string") || !sameType){
+		if(!(type === "number" || type === "string") || !sameType){
 			throw "The input to this constructor must be numbers, strings, or empty, & must be of the same type.";
-		}*/
+		}
 	}
 
 	getHeadValue(){
@@ -49,11 +47,15 @@ export default class LinkedList {
 	}
 
 	insertValueHead(value){
+		this._throwIfInvalidType(value);
+
 		var nodeToAdd = new Node(value);
 		this.insertNodeHead(nodeToAdd);
 	}
 
 	insertNodeHead(node){
+		this._throwIfInvalidType(node.getValue());
+
 		if(this.isEmpty()){
 			this._insertFirstNodeInList(node);
 		} else {
@@ -65,11 +67,15 @@ export default class LinkedList {
 	}
 
 	insertValueTail(value){
+		this._throwIfInvalidType(value);
+
 		var nodeToAdd = new Node(value);
 		this.insertNodeTail(nodeToAdd);
 	}
 
 	insertNodeTail(node){
+		this._throwIfInvalidType(node.getValue());
+
 		if(this.isEmpty()){
 			this._insertFirstNodeInList(node);
 		} else {
@@ -81,6 +87,7 @@ export default class LinkedList {
 	}
 
 	insertValueAtIndex(index, value){
+		this._throwIfInvalidType(value);
 		this._throwIfIndexOutOfBoundsInsert(index);
 
 		var node = new Node(value);
@@ -88,6 +95,7 @@ export default class LinkedList {
 	}
 
 	insertNodeAtIndex(index, node){
+		this._throwIfInvalidType(node.getValue());
 		this._throwIfIndexOutOfBoundsInsert(index);
 
 		if(this.isEmpty()){
@@ -226,6 +234,17 @@ export default class LinkedList {
 
 	isEmpty(){
 		return this.size === 0;
+	}
+
+	_throwIfInvalidType(value){
+		if(!this.type){
+			this.type = typeof(value);
+			return;
+		}
+
+		if(typeof(value) !== this.type){
+			throw "The only valid type for this LinkedList is " + typeof(value);
+		}
 	}
 
 	toString(){

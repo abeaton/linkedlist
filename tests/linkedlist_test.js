@@ -163,7 +163,7 @@ test("General insert", t => {
 test("Index too small", testInsertAtInvalidIndex, new LinkedList(), -1);
 test("Index too large", testInsertAtInvalidIndex, new LinkedList(), 1);
 test("Index too small, non empty linkedlist", testInsertAtInvalidIndex, new LinkedList(3, 2, 8), -1);
-test("Index too large, non empty linkedlist", testInsertAtInvalidIndex, new LinkedList(1, 2, 3, 4), 4);
+test("Index too large, non empty linkedlist", testInsertAtInvalidIndex, new LinkedList(1, 2, 3, 4), 5);
 
 function testInsertAtInvalidIndex(t, linkedlist, index){
 	t.throws(() => linkedlist.insertValueAtIndex(index, 1));
